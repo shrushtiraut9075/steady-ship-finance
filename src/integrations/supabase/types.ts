@@ -14,7 +14,174 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      allocations: {
+        Row: {
+          asset_class: string
+          current_weight: number
+          id: string
+          portfolio_id: string
+          target_weight: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          asset_class: string
+          current_weight?: number
+          id?: string
+          portfolio_id: string
+          target_weight?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          asset_class?: string
+          current_weight?: number
+          id?: string
+          portfolio_id?: string
+          target_weight?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "allocations_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            isOneToOne: false
+            referencedRelation: "portfolios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      portfolios: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          risk_score: number
+          total_value: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          risk_score?: number
+          total_value?: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          risk_score?: number
+          total_value?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      risk_alerts: {
+        Row: {
+          action_taken: string | null
+          created_at: string
+          id: string
+          message: string | null
+          portfolio_id: string | null
+          severity: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          action_taken?: string | null
+          created_at?: string
+          id?: string
+          message?: string | null
+          portfolio_id?: string | null
+          severity?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          action_taken?: string | null
+          created_at?: string
+          id?: string
+          message?: string | null
+          portfolio_id?: string | null
+          severity?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "risk_alerts_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            isOneToOne: false
+            referencedRelation: "portfolios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scenarios: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          portfolio_id: string | null
+          result: Json | null
+          shock_asset_class: string
+          shock_pct: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          portfolio_id?: string | null
+          result?: Json | null
+          shock_asset_class: string
+          shock_pct: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          portfolio_id?: string | null
+          result?: Json | null
+          shock_asset_class?: string
+          shock_pct?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scenarios_portfolio_id_fkey"
+            columns: ["portfolio_id"]
+            isOneToOne: false
+            referencedRelation: "portfolios"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
