@@ -82,7 +82,7 @@ function Simulator() {
         name: `${assetClass} ${shock}%`,
         shock_asset_class: assetClass,
         shock_pct: shock,
-        result: impact as unknown as Record<string, unknown>,
+        result: JSON.parse(JSON.stringify(impact)),
       });
       await queryClient.invalidateQueries({ queryKey: ["scenarios"] });
     }
